@@ -17,8 +17,8 @@ function Login() {
   const navigate = useNavigate();
 
   const handleLogin = (event) => {
-    setDisableButton(true);
     if (passwordField) {
+      setDisableButton(true);
       const url = "https://benchatapp.onrender.com/user/login";
       const data = { username: usernameField, password: passwordField };
 
@@ -48,15 +48,15 @@ function Login() {
               errorText: json.error,
             });
           }
+          setDisableButton(false);
         })
         .catch((error) => console.log(error));
     }
-    setDisableButton(false);
   };
 
   const handleSignup = (event) => {
-    setDisableButton(true);
     if (passwordField) {
+      setDisableButton(true);
       const url = "https://benchatapp.onrender.com/user/signup";
       const data = { username: usernameField, password: passwordField };
 
@@ -84,10 +84,10 @@ function Login() {
               errorText: json.error,
             });
           }
+          setDisableButton(false);
         })
         .catch((error) => console.log(error));
     }
-    setDisableButton(false);
   };
 
   return (
