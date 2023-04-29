@@ -24,7 +24,7 @@ function Login() {
     if (passwordField && usernameField) {
       setDisableButton(true);
       //const url = "https://benchatapp.onrender.com/user/login"; // live
-      const url = "https://benchatappbackend.onrender.com//user/login"; // dev
+      const url = "https://benchatappbackend.onrender.com/user/login"; // dev
 
       const data = { username: usernameField, password: passwordField };
 
@@ -70,7 +70,7 @@ function Login() {
     if (passwordField) {
       setDisableButton(true);
       //const url = "https://benchatapp.onrender.com/user/login"; // live
-      const url = "https://benchatappbackend.onrender.com//user/login"; // dev
+      const url = "https://benchatappbackend.onrender.com/user/login"; // dev
       const data = { username: usernameField, password: passwordField };
 
       fetch(url, {
