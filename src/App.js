@@ -69,8 +69,8 @@ function App() {
       <Routes>
         <Route index element={<BasicChatApp />} />
         <Route path="/" element={<BasicChatApp />} />
-        <Route path="BasicChatApp" element={<BasicChatApp />} />
-        <Route path="BasicChatApp/Login" element={<Login />} />
+        <Route path="/BasicChatApp" element={<BasicChatApp />} />
+        <Route path="/BasicChatApp/Login" element={<Login />} />
       </Routes>
     </div>
   );
