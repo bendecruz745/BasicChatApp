@@ -64,15 +64,12 @@ function App() {
 
   return (
     <div className="App bg-secondary">
-      <HashRouter>
-        <NavBar />
-        <Routes>
-          <Route index element={<BasicChatApp />} />
-          <Route exact path="/" element={<BasicChatApp />} />
-          <Route path="/BasicChatApp" element={<BasicChatApp />} />
-          <Route path="/BasicChatApp/Login" element={<Login />} />
-        </Routes>
-      </HashRouter>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<BasicChatApp />} />
+        <Route path="/BasicChatApp" element={<BasicChatApp />} />
+        <Route path="/BasicChatApp/Login" element={<Login />} />
+      </Routes>
     </div>
   );
 }
