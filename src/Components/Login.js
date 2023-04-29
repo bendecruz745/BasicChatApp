@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import { Button, Container } from "react-bootstrap";
-import { useDispatch } from "react-redux";
 import "../CSS/Login.css";
 import AlertBox from "./Alert";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector, connect } from "react-redux";
+import { login, logout } from "../Reducers/loggedInSlice";
+import Cookies from "js-cookie";
+import store from "../store";
 
 function Login() {
   const [passwordField, setPasswordField] = useState("");
   const [usernameField, setUsernameField] = useState("");
   const [disableButton, setDisableButton] = useState(false);
+  const dispatch = useDispatch();
   const [alert, setAlert] = useState({
     display: false,
     errorType: "danger",
@@ -17,9 +21,11 @@ function Login() {
   const navigate = useNavigate();
 
   const handleLogin = (event) => {
-    if (passwordField) {
+    if (passwordField && usernameField) {
       setDisableButton(true);
-      const url = "https://benchatapp.onrender.com/user/login";
+      //const url = "https://benchatapp.onrender.com/user/login"; // live
+      const url = "http://localhost:4000/user/login"; // dev
+
       const data = { username: usernameField, password: passwordField };
 
       fetch(url, {
@@ -33,12 +39,12 @@ function Login() {
         .then((json) => {
           if (json.token) {
             console.log(json);
-            localStorage.setItem("authToken", json.token);
             setAlert({
               display: true,
               errorType: "success",
               errorText: "Logging in....",
             });
+            dispatch(login({ username: json.username, authToken: json.token }));
             navigate("/BasicChatApp");
           } else {
             console.log(json);
@@ -51,13 +57,20 @@ function Login() {
           setDisableButton(false);
         })
         .catch((error) => console.log(error));
+    } else {
+      setAlert({
+        display: true,
+        errorType: "warning",
+        errorText: "Username or Password field empty",
+      });
     }
   };
 
   const handleSignup = (event) => {
     if (passwordField) {
       setDisableButton(true);
-      const url = "https://benchatapp.onrender.com/user/signup";
+      //const url = "https://benchatapp.onrender.com/user/login"; // live
+      const url = "http://localhost:4000/user/login"; // dev
       const data = { username: usernameField, password: passwordField };
 
       fetch(url, {
