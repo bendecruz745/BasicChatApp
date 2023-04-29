@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     console.log("auto auth check");
-    const url = "https://benchatapp.onrender.com/user/isLoggedIn";
+    const url = "https://benchatappbackend.onrender.com//user/isLoggedIn";
     setLoading(true);
 
     const cookieAuthToken = Cookies.get("authtoken");
