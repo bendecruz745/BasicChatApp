@@ -11,57 +11,57 @@ import Cookies from "js-cookie";
 import { loginRefresh, login, logout } from "./Reducers/loggedInSlice";
 
 function App() {
-  // const [loading, setLoading] = useState(false);
-  // const location = useLocation();
+  const [loading, setLoading] = useState(false);
+  const location = useLocation();
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   console.log("auto auth check");
-  //   const url = "https://benchatappbackend.onrender.com/user/isLoggedIn";
-  //   setLoading(true);
+  useEffect(() => {
+    console.log("auto auth check");
+    const url = "https://benchatappbackend.onrender.com/user/isLoggedIn";
+    setLoading(true);
 
-  //   const cookieAuthToken = Cookies.get("authtoken");
-  //   if (cookieAuthToken) {
-  //     console.log(`Cookie exists, its ${cookieAuthToken}`);
-  //     fetch(url, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `bearer ${cookieAuthToken}`,
-  //       },
-  //     })
-  //       .then((response) => response.json())
-  //       .then((json) => {
-  //         if (json.LoginCheck) {
-  //           console.log(json);
-  //           dispatch(
-  //             login({
-  //               isLoggedIn: true,
-  //               username: json.username,
-  //               authToken: json.newToken,
-  //             })
-  //           );
-  //           setLoading(false);
-  //         } else {
-  //           console.log(json);
-  //           dispatch(
-  //             logout({
-  //               isLoggedIn: true,
-  //               username: json.username,
-  //               authToken: json.newToken,
-  //             })
-  //           );
-  //           setLoading(false);
-  //         }
-  //       })
-  //       .catch((error) => console.log(error));
-  //   } else {
-  //     console.log("cookie does not exist");
-  //     dispatch(logout());
-  //     setLoading(false);
-  //   }
-  // }, [location, dispatch]);
+    const cookieAuthToken = Cookies.get("authtoken");
+    if (cookieAuthToken) {
+      console.log(`Cookie exists, its ${cookieAuthToken}`);
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `bearer ${cookieAuthToken}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          if (json.LoginCheck) {
+            console.log(json);
+            dispatch(
+              login({
+                isLoggedIn: true,
+                username: json.username,
+                authToken: json.newToken,
+              })
+            );
+            setLoading(false);
+          } else {
+            console.log(json);
+            dispatch(
+              logout({
+                isLoggedIn: true,
+                username: json.username,
+                authToken: json.newToken,
+              })
+            );
+            setLoading(false);
+          }
+        })
+        .catch((error) => console.log(error));
+    } else {
+      console.log("cookie does not exist");
+      dispatch(logout());
+      setLoading(false);
+    }
+  }, [location, dispatch]);
 
   return (
     <div className="App bg-secondary">
