@@ -15,7 +15,7 @@ function BasicChatApp({ appLoading }) {
 
   const handleLoginCheck = () => {
     console.log("manual auth check");
-    const url = "http://localhost:4000/user/isLoggedIn";
+    const url = "https://benchatapp.onrender.com/user/isLoggedIn";
 
     const cookieAuthToken = Cookies.get("authtoken");
     if (cookieAuthToken) {
