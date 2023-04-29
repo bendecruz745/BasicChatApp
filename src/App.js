@@ -68,7 +68,6 @@ function App() {
       <NavBar />
       <Routes>
         <Route index element={<BasicChatApp />} />
-        <Route path="/" element={<BasicChatApp />} />
         <Route path="/BasicChatApp" element={<BasicChatApp />} />
         <Route path="/BasicChatApp/Login" element={<Login />} />
       </Routes>
