@@ -25,6 +25,7 @@ function Login() {
       setDisableButton(true);
       //const url = "https://benchatapp.onrender.com/user/login"; // live
       const url = "https://benchatappbackend.onrender.com/user/login"; // dev
+      console.log("handle login on login page run");
 
       const data = { username: usernameField, password: passwordField };
 
