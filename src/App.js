@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "./App.css";
-import { Route, Routes, useLocation, HashRouter } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import NavBar from "./Components/NavBar";
 import BasicChatApp from "./Components/BasicChatApp";
@@ -12,6 +12,7 @@ import { loginRefresh, login, logout } from "./Reducers/loggedInSlice";
 
 function App() {
   const [loading, setLoading] = useState(false);
+  const location = useLocation();
 
   const dispatch = useDispatch();
 
@@ -60,7 +61,7 @@ function App() {
       dispatch(logout());
       setLoading(false);
     }
-  }, []);
+  }, [location, dispatch]);
 
   return (
     <div className="App bg-secondary">
