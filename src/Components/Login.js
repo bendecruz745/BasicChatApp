@@ -45,8 +45,9 @@ function Login() {
   const handleSignup = (event) => {
     if (passwordField) {
       setDisableButton(true);
-      const url = "https://benchatappbackend.onrender.com/user/login"; // live
+      // const url = "https://benchatappbackend.onrender.com/user/login"; // live
       // const url = "http://localhost:4000/user/login"; // dev
+      const url = process.env.REACT_APP_BASE_URL + "/user/login";
       const data = { username: usernameField, password: passwordField };
 
       fetch(url, {

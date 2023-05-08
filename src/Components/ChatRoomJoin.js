@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { io } from "socket.io-client";
 
 const ChatRoomJoin = () => {
   const [roomName, setRoomName] = React.useState("");

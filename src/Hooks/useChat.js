@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import socketIOClient from "socket.io-client";
-import { io } from "socket.io-client";
 
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage"; // Name of the event
-const CHAT_HISTORY_EVENT = "chatHistory";
 const RETRIEVE_CHAT_HISTORY = "retrieveChatHistory";
 
 // const SOCKET_SERVER_URL = "http://localhost:4000"; //dev
-const SOCKET_SERVER_URL = "https://benchatappbackend.onrender.com";
+// const SOCKET_SERVER_URL = "https://benchatappbackend.onrender.com"; // live
+const SOCKET_SERVER_URL = process.env.REACT_APP_BASE_URL;
 
 const useChat = (roomId) => {
   const [messages, setMessages] = useState([]); // Sent and received messages

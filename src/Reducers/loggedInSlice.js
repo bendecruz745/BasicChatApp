@@ -41,8 +41,9 @@ export const login =
     // console.log(
     //   `Saving login state, username is ${username} with token ${authToken} with login state ${isLoggedIn}`
     // );
-    const url = "https://benchatappbackend.onrender.com/user/login"; // live
+    // const url = "https://benchatappbackend.onrender.com/user/login"; // live
     // const url = "http://localhost:4000/user/login"; // dev
+    const url = process.env.REACT_APP_BASE_URL + "/user/login";
 
     console.log("login in loggedInSliceReducer run");
 
@@ -94,8 +95,9 @@ export const loginRefresh =
     console.log(
       `auto auth check, cookie picked up is ${Cookies.get("authtoken")}`
     );
-    const url = "https://benchatappbackend.onrender.com/user/isLoggedIn"; //live
+    // const url = "https://benchatappbackend.onrender.com/user/isLoggedIn"; //live
     // const url = "http://localhost:4000/user/isLoggedIn"; //dev
+    const url = process.env.REACT_APP_BASE_URL + "/user/isLoggedIn";
 
     const cookieAuthToken = Cookies.get("authtoken");
     if (cookieAuthToken !== undefined) {
