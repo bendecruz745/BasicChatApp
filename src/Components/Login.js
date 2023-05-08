@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Button, Container } from "react-bootstrap";
 import "../CSS/Login.css";
 import AlertBox from "./Alert";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector, connect } from "react-redux";
-import { login, logout } from "../Reducers/loggedInSlice";
-import Cookies from "js-cookie";
-import store from "../store";
+import { useDispatch } from "react-redux";
+import { login } from "../Reducers/loggedInSlice";
 
 function Login() {
-  const [passwordField, setPasswordField] = useState("");
-  const [usernameField, setUsernameField] = useState("");
+  // const [passwordField, setPasswordField] = useState("");
+  const passwordFieldRef = useRef();
+  // const [usernameField, setUsernameField] = useState("");
+  const usernameFieldRef = useRef();
   const [disableButton, setDisableButton] = useState(false);
   const dispatch = useDispatch();
   const [alert, setAlert] = useState({
@@ -19,45 +19,20 @@ function Login() {
     errorText: "placeholder",
   });
   const navigate = useNavigate();
+  const usernameField = null;
+  const passwordField = null;
+
+  console.log("rendering Login component");
 
   const handleLogin = (event) => {
+    const usernameField = usernameFieldRef.current.value;
+    const passwordField = passwordFieldRef.current.value;
     if (passwordField && usernameField) {
       setDisableButton(true);
-      //const url = "https://benchatapp.onrender.com/user/login"; // live
-      const url = "https://benchatappbackend.onrender.com/user/login"; // dev
-      console.log("handle login on login page run");
-
-      const data = { username: usernameField, password: passwordField };
-
-      fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-        .then((response) => response.json())
-        .then((json) => {
-          if (json.token) {
-            console.log(json);
-            setAlert({
-              display: true,
-              errorType: "success",
-              errorText: "Logging in....",
-            });
-            dispatch(login({ username: json.username, authToken: json.token }));
-            navigate("/BasicChatApp");
-          } else {
-            console.log(json);
-            setAlert({
-              display: true,
-              errorType: "danger",
-              errorText: json.error,
-            });
-          }
-          setDisableButton(false);
-        })
-        .catch((error) => console.log(error));
+      console.log("handleLogin in Login.js run");
+      const loginData = { username: usernameField, password: passwordField };
+      dispatch(login({ loginData, setAlert, setDisableButton, navigate }));
+      setDisableButton(false);
     } else {
       setAlert({
         display: true,
@@ -70,8 +45,8 @@ function Login() {
   const handleSignup = (event) => {
     if (passwordField) {
       setDisableButton(true);
-      //const url = "https://benchatapp.onrender.com/user/login"; // live
-      const url = "https://benchatappbackend.onrender.com/user/login"; // dev
+      const url = "https://benchatappbackend.onrender.com/user/login"; // live
+      // const url = "http://localhost:4000/user/login"; // dev
       const data = { username: usernameField, password: passwordField };
 
       fetch(url, {
@@ -119,10 +94,11 @@ function Login() {
               className="ms-1"
               id="usernameInput"
               placeholder="Username"
-              value={usernameField}
-              onChange={(event) => {
-                setUsernameField(event.target.value);
-              }}
+              // value={usernameField}
+              // onChange={(event) => {
+              //   setUsernameField(event.target.value);
+              // }}
+              ref={usernameFieldRef}
             />
           </div>
           <div className="passwordField d-flex justify-content-between">
@@ -131,16 +107,17 @@ function Login() {
               className="ms-1"
               id="passwordInput"
               placeholder="Password"
-              value={passwordField}
+              // value={passwordField}
               type="password"
               onKeyDown={(event) => {
                 if (event.key === "Enter") {
                   handleLogin(event);
                 }
               }}
-              onChange={(event) => {
-                setPasswordField(event.target.value);
-              }}
+              // onChange={(event) => {
+              //   setPasswordField(event.target.value);
+              // }}
+              ref={passwordFieldRef}
             />
           </div>
         </div>

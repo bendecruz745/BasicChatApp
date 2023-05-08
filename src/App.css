@@ -3,6 +3,10 @@
   height: 100vh;
 }
 
+.messages-list {
+  height: 40vh;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

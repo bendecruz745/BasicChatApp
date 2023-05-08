@@ -2,19 +2,19 @@ import React from "react";
 import { useState } from "react";
 import { Container, Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import store from "../store";
 import { useSelector } from "react-redux";
 
 function NavBar() {
   const [expanded, setExpanded] = useState(false);
-  const username = useSelector((state) => state.loginReducer.username);
-  const loggedIn = useSelector((state) => state.loginReducer.isLoggedIn);
+  const loginState = useSelector((state) => state.loginReducer);
+  console.log("rendering navbar");
+  console.log(`navbar reading login state as ${JSON.stringify(loginState)}`);
 
   return (
     <Navbar expanded={expanded} bg="dark" variant="dark" expand="lg">
       <Container fluid>
         <Link
-          to="BasicChatApp"
+          to={loginState.isLoggedIn ? "/ChatApp" : "/"}
           className="nav-link"
           onClick={() => setExpanded(false)}
         >
@@ -26,17 +26,17 @@ function NavBar() {
         />
         <Navbar.Collapse id="navbarScroll" className="justify-content-end">
           <Nav navbarScroll>
-            {loggedIn ? (
+            {loginState.username ? (
               <Link
-                to="BasicChatApp/Profile"
-                className="nav-link"
+                to="/Profile"
+                className="nav-link "
                 onClick={() => setExpanded(false)}
               >
-                {username}
+                {loginState.username}
               </Link>
             ) : (
               <Link
-                to="BasicChatApp/Login"
+                to="/Login"
                 className="nav-link "
                 onClick={() => setExpanded(false)}
               >
