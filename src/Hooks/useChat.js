@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import socketIOClient from "socket.io-client";
+import Cookies from "js-cookie";
+import { useSelector } from "react-redux";
 
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage"; // Name of the event
 const RETRIEVE_CHAT_HISTORY = "retrieveChatHistory";
@@ -10,6 +12,8 @@ const SOCKET_SERVER_URL = process.env.REACT_APP_BASE_URL;
 
 const useChat = (roomId) => {
   const [messages, setMessages] = useState([]); // Sent and received messages
+  const username = useSelector((state) => state.loginReducer.username);
+
   const socketRef = useRef();
   console.log("useChat triggered");
   console.log(`roomID is ${roomId}`);
@@ -17,8 +21,12 @@ const useChat = (roomId) => {
   useEffect(() => {
     // Creates a WebSocket connection
     console.log("Creating new websocket connection");
+    const cookieAuthToken = Cookies.get("authtoken");
     socketRef.current = socketIOClient(SOCKET_SERVER_URL, {
-      query: { roomId },
+      query: {
+        roomId,
+        Authorization: `bearer ${cookieAuthToken}`,
+      },
     });
 
     socketRef.current.on(RETRIEVE_CHAT_HISTORY, (chatHistory) => {
@@ -30,8 +38,14 @@ const useChat = (roomId) => {
     socketRef.current.on(NEW_CHAT_MESSAGE_EVENT, (message) => {
       const incomingMessage = {
         ...message,
-        ownedByCurrentUser: message.senderId === socketRef.current.id,
+        ownedByCurrentUser: message.senderUsername === username,
       };
+      console.log(
+        "receiving message, message username is ",
+        message.senderUsername
+      );
+      console.log("compared to redux store state username of  ", username);
+
       setMessages((messages) => [...messages, incomingMessage]);
     });
 

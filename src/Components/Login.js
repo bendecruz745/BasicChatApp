@@ -19,8 +19,6 @@ function Login() {
     errorText: "placeholder",
   });
   const navigate = useNavigate();
-  const usernameField = null;
-  const passwordField = null;
 
   console.log("rendering Login component");
 
@@ -43,11 +41,13 @@ function Login() {
   };
 
   const handleSignup = (event) => {
+    const usernameField = usernameFieldRef.current.value;
+    const passwordField = passwordFieldRef.current.value;
     if (passwordField) {
       setDisableButton(true);
       // const url = "https://benchatappbackend.onrender.com/user/login"; // live
       // const url = "http://localhost:4000/user/login"; // dev
-      const url = process.env.REACT_APP_BASE_URL + "/user/login";
+      const url = process.env.REACT_APP_BASE_URL + "/user/signup";
       const data = { username: usernameField, password: passwordField };
 
       fetch(url, {

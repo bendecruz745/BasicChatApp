@@ -1,21 +1,26 @@
-import { useState } from "react";
+import { useRef } from "react";
 
 import useChat from "../Hooks/useChat";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const ChatRoom = (props) => {
+const ChatRoom = () => {
   const { messages, sendMessage } = useChat(useParams().roomID); // Creates a websocket and manages messaging
-  const [newMessage, setNewMessage] = useState(""); // Message to be sent
-  console.log("chatroom here, messages is ", messages);
+  const username = useSelector((state) => state.loginReducer.username);
 
-  const handleNewMessageChange = (event) => {
-    setNewMessage(event.target.value);
-  };
+  // const [newMessage, setNewMessage] = useState(""); // Message to be sent
+  const newMessage = useRef();
+  // console.log("chatroom here, messages is ", messages);
+
+  // const handleNewMessageChange = (event) => {
+  //   setNewMessage(event.target.value);
+  // };
 
   const handleSendMessage = () => {
-    console.log("sending message, also chat history is ", messages);
-    sendMessage(newMessage);
-    setNewMessage("");
+    // console.log("sending message, also chat history is ", messages);
+    sendMessage(newMessage.current.value);
+    newMessage.current.value = "";
+    // setNewMessage("");
   };
 
   return (
@@ -31,7 +36,7 @@ const ChatRoom = (props) => {
                 <li
                   key={i}
                   className={`message-item ${
-                    message.ownedByCurrentUser
+                    username === message.senderUsername
                       ? "my-message"
                       : "received-message"
                   }`}
@@ -45,8 +50,9 @@ const ChatRoom = (props) => {
         </ol>
       </div>
       <textarea
-        value={newMessage}
-        onChange={handleNewMessageChange}
+        // value={newMessage}
+        // onChange={handleNewMessageChange}
+        ref={newMessage}
         placeholder="Write message..."
         className="new-message-input-field"
         onKeyDown={(event) => {

@@ -9,14 +9,16 @@ import ChatApp from "./Components/ChatApp";
 import Profile from "./Components/Profile";
 import ChatRoom from "./Components/ChatRoom";
 // import { useDispatch } from "react-redux";
-// import { loginRefresh } from "./Reducers/loggedInSlice";
+import { loginRefresh } from "./Reducers/loggedInSlice";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 function App() {
   console.log("main app loading");
 
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
-  // dispatch(loginRefresh(navigate));
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  dispatch(loginRefresh(navigate));
 
   return (
     <div className="App bg-secondary">

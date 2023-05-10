@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
 
-const initialState = {
+const initialCheckUrl = process.env.REACT_APP_BASE_URL + "/user/isLoggedIn";
+
+var initialState = {
   isLoggedIn: false,
   authToken: "",
   username: "",
@@ -13,9 +15,6 @@ const loggedInSlice = createSlice({
   initialState,
   reducers: {
     loginSuccess: (state, data) => {
-      // console.log(
-      //   `loginSuccess slice hit, data is ${JSON.stringify(data.payload)}`
-      // );
       state.isLoggedIn = true;
       state.authToken = data.payload.authToken;
       state.username = data.payload.username;
