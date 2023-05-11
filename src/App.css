@@ -5,10 +5,16 @@
 
 .messages-list {
   height: 40vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .message-item {
   list-style: none;
+  word-wrap: break-word;
+}
+.message-text {
+  /* text-align: left; */
 }
 
 .received-message {

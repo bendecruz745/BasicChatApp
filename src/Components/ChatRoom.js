@@ -24,24 +24,30 @@ const ChatRoom = () => {
   };
 
   return (
-    <div className="chat-room-container">
-      <h1 className="room-name">Room: {useParams().roomID}</h1>
-      <div className="messages-container">
-        <ol className="messages-list overflow-auto d-flex flex-column-reverse">
+    <div className="chat-room-container d-flex flex-column align-items-center w-100">
+      <h1 className="room-name bg-success m-0 w-50">
+        Room: {useParams().roomID}
+      </h1>
+      <div className="messages-container w-50">
+        <ol className="messages-list d-flex flex-column-reverse p-0">
           {messages ? (
             messages
               .slice(0)
               .reverse()
               .map((message, i) => (
                 <li
-                  key={i}
                   className={`message-item ${
                     username === message.senderUsername
                       ? "my-message"
                       : "received-message"
                   }`}
                 >
-                  {message.messageBody}
+                  <h4 className="message-useranme text-start m-0">
+                    {message.senderUsername}
+                  </h4>
+                  <li key={i} className="message-text text-start">
+                    {message.messageBody}
+                  </li>
                 </li>
               ))
           ) : (
@@ -49,21 +55,23 @@ const ChatRoom = () => {
           )}
         </ol>
       </div>
-      <textarea
-        // value={newMessage}
-        // onChange={handleNewMessageChange}
-        ref={newMessage}
-        placeholder="Write message..."
-        className="new-message-input-field"
-        onKeyDown={(event) => {
-          if (event.key === "Enter") {
-            handleSendMessage();
-          }
-        }}
-      />
-      <button onClick={handleSendMessage} className="send-message-button">
-        Send
-      </button>
+      <div className="new-message-field w-50">
+        <input
+          // value={newMessage}
+          // onChange={handleNewMessageChange}
+          ref={newMessage}
+          placeholder="Write message..."
+          className="new-message-input-field"
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              handleSendMessage();
+            }
+          }}
+        />
+        <button onClick={handleSendMessage} className="send-message-button">
+          Send
+        </button>
+      </div>
     </div>
   );
 };
