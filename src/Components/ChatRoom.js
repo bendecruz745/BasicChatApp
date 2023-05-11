@@ -29,7 +29,7 @@ const ChatRoom = () => {
         Room: {useParams().roomID}
       </h1>
       <div className="messages-container w-50">
-        <ol className="messages-list d-flex flex-column-reverse p-0">
+        <ol className="messages-list d-flex flex-column-reverse p-0 m-0">
           {messages ? (
             messages
               .slice(0)
@@ -42,7 +42,7 @@ const ChatRoom = () => {
                       : "received-message"
                   }`}
                 >
-                  <h4 className="message-useranme text-start m-0">
+                  <h4 className="message-username text-start m-0">
                     {message.senderUsername}
                   </h4>
                   <li key={i} className="message-text text-start">
@@ -61,14 +61,17 @@ const ChatRoom = () => {
           // onChange={handleNewMessageChange}
           ref={newMessage}
           placeholder="Write message..."
-          className="new-message-input-field"
+          className="new-message-input-field w-75"
           onKeyDown={(event) => {
             if (event.key === "Enter") {
               handleSendMessage();
             }
           }}
         />
-        <button onClick={handleSendMessage} className="send-message-button">
+        <button
+          onClick={handleSendMessage}
+          className="send-message-button w-25"
+        >
           Send
         </button>
       </div>
