@@ -3,9 +3,13 @@ import { useRef } from "react";
 import useChat from "../Hooks/useChat";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import ChatMessage from "./ChatMessage";
 
 const ChatRoom = () => {
-  const { messages, sendMessage } = useChat(useParams().roomID); // Creates a websocket and manages messaging
+  console.log("rendering chatroom");
+  const navigate = useNavigate();
+  const { messages, sendMessage } = useChat(useParams().roomID, navigate); // Creates a websocket and manages messaging
   const username = useSelector((state) => state.loginReducer.username);
 
   // const [newMessage, setNewMessage] = useState(""); // Message to be sent
@@ -18,52 +22,43 @@ const ChatRoom = () => {
 
   const handleSendMessage = () => {
     // console.log("sending message, also chat history is ", messages);
-    sendMessage(newMessage.current.value);
-    newMessage.current.value = "";
+    if (
+      newMessage.current.value &&
+      newMessage.current.value.replace(/\s/g, "").length
+    ) {
+      sendMessage(newMessage.current.value);
+      newMessage.current.value = null;
+    }
     // setNewMessage("");
   };
 
   return (
     <div className="chat-room-container d-flex flex-column align-items-center w-100">
-      <h1 className="room-name bg-success m-0 w-50">
-        Room: {useParams().roomID}
-      </h1>
-      <div className="messages-container w-50">
+      <h3 className="room-name m-0 mt-2">{useParams().roomID}</h3>
+      <div className="messages-container">
         <ol className="messages-list d-flex flex-column-reverse p-0 m-0">
           {messages ? (
             messages
               .slice(0)
               .reverse()
               .map((message, i) => (
-                <li
-                  className={`message-item ${
-                    username === message.senderUsername
-                      ? "my-message"
-                      : "received-message"
-                  }`}
-                >
-                  <h4 className="message-username text-start m-0">
-                    {message.senderUsername}
-                  </h4>
-                  <li key={i} className="message-text text-start">
-                    {message.messageBody}
-                  </li>
-                </li>
+                <ChatMessage message={message} key={i} username={username} />
               ))
           ) : (
             <div>No messages to display</div>
           )}
         </ol>
       </div>
-      <div className="new-message-field w-50">
-        <input
+      <div className="new-message-field d-flex">
+        <textarea
           // value={newMessage}
           // onChange={handleNewMessageChange}
           ref={newMessage}
           placeholder="Write message..."
-          className="new-message-input-field w-75"
+          className="new-message-input-field w-75 border-0"
           onKeyDown={(event) => {
-            if (event.key === "Enter") {
+            if (event.key === "Enter" && !event.shiftKey) {
+              event.preventDefault();
               handleSendMessage();
             }
           }}

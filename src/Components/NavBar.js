@@ -18,7 +18,9 @@ function NavBar() {
           className="nav-link"
           onClick={() => setExpanded(false)}
         >
-          <Navbar.Brand>Ben's Basic Chat App</Navbar.Brand>
+          <Navbar.Brand>
+            Ben's Basic Chat App {loginState.isLoggedIn}
+          </Navbar.Brand>
         </Link>
         <Navbar.Toggle
           aria-controls="navbarScroll"

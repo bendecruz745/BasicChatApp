@@ -14,7 +14,7 @@ function ChatApp() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  dispatch(loginRefresh(navigate));
+  // dispatch(loginRefresh(navigate));
 
   const logOutHandler = () => {
     dispatch(logout(navigate));

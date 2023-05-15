@@ -1,18 +1,22 @@
 import { useEffect, useRef, useState } from "react";
 import socketIOClient from "socket.io-client";
 import Cookies from "js-cookie";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../Reducers/loggedInSlice";
+import { io } from "socket.io-client";
 
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage"; // Name of the event
 const RETRIEVE_CHAT_HISTORY = "retrieveChatHistory";
+const LOGGEDOUT_EVENT = "loggedOut";
 
 // const SOCKET_SERVER_URL = "http://localhost:4000"; //dev
 // const SOCKET_SERVER_URL = "https://benchatappbackend.onrender.com"; // live
 const SOCKET_SERVER_URL = process.env.REACT_APP_BASE_URL;
 
-const useChat = (roomId) => {
+const useChat = (roomId, navigate) => {
   const [messages, setMessages] = useState([]); // Sent and received messages
   const username = useSelector((state) => state.loginReducer.username);
+  const dispatch = useDispatch();
 
   const socketRef = useRef();
   console.log("useChat triggered");
@@ -49,12 +53,18 @@ const useChat = (roomId) => {
       setMessages((messages) => [...messages, incomingMessage]);
     });
 
+    socketRef.current.on(LOGGEDOUT_EVENT, () => {
+      dispatch(logout);
+      navigate("/");
+    });
+
     // Destroys the socket reference
     // when the connection is closed
     return () => {
       console.log("disconnect firing");
+      socketRef.current.disconnect();
     };
-  }, [roomId]);
+  }, [roomId, dispatch, navigate, username]);
 
   // Sends a message to the server that
   // forwards it to all users in the same room

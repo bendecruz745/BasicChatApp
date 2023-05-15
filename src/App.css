@@ -3,10 +3,28 @@
   height: 100vh;
 }
 
+.room-name,
+.messages-container,
+.new-message-field {
+  width: 60vw;
+}
+
 .messages-list {
-  height: 40vh;
+  height: 30rem;
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+.message-timesent {
+  font-size: 1rem;
+}
+
+.new-message-input-field {
+  resize: none;
+  height: 2em;
+}
+.room-name {
+  background-color: #4e4e4e;
 }
 
 .message-item {
@@ -14,8 +32,13 @@
   word-wrap: break-word;
 }
 
+.message-text {
+  white-space: break-spaces;
+}
+
 .message-item:hover {
   filter: brightness(90%);
+  cursor: pointer;
 }
 
 .received-message {
