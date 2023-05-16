@@ -22,31 +22,25 @@ function NavBar() {
             Ben's Basic Chat App {loginState.isLoggedIn}
           </Navbar.Brand>
         </Link>
-        <Navbar.Toggle
-          aria-controls="navbarScroll"
-          onClick={() => setExpanded(expanded ? false : "expanded")}
-        />
-        <Navbar.Collapse id="navbarScroll" className="justify-content-end">
-          <Nav navbarScroll>
-            {loginState.username ? (
-              <Link
-                to="/Profile"
-                className="nav-link "
-                onClick={() => setExpanded(false)}
-              >
-                {loginState.username}
-              </Link>
-            ) : (
-              <Link
-                to="/Login"
-                className="nav-link "
-                onClick={() => setExpanded(false)}
-              >
-                Login
-              </Link>
-            )}
-          </Nav>
-        </Navbar.Collapse>
+        <Nav navbarScroll>
+          {loginState.username ? (
+            <Link
+              to="/Profile"
+              className="nav-link "
+              onClick={() => setExpanded(false)}
+            >
+              {loginState.username}
+            </Link>
+          ) : (
+            <Link
+              to="/Login"
+              className="nav-link "
+              onClick={() => setExpanded(false)}
+            >
+              Login
+            </Link>
+          )}
+        </Nav>
       </Container>
     </Navbar>
   );

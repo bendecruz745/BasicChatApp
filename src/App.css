@@ -1,18 +1,58 @@
-.App {
-  text-align: center;
+#root {
   height: 100vh;
+  max-height: 100vh;
 }
 
-.room-name,
+.App {
+  text-align: center;
+  background-color: green;
+  height: 100%;
+  max-height: 100%;
+}
+
+.navbar {
+  height: 5%;
+  min-height: 5%;
+}
+
+.server-list,
+.user-list {
+  width: 15%;
+}
+
+.chat-room,
+.chat-room-join {
+  height: 100%;
+  max-height: 100%;
+}
+
+.chat-room-container {
+  height: 100%;
+  width: 70%;
+}
+
+.room-name-container,
 .messages-container,
 .new-message-field {
-  width: 60vw;
+  width: 100%;
+}
+
+.messages-container {
+  height: 100%;
+  max-height: 88%;
+}
+
+.room-name-container,
+.new-message-field {
+  height: 5.7vh;
 }
 
 .messages-list {
-  height: 30rem;
-  overflow-y: auto;
+  overflow-y: scroll;
   overflow-x: hidden;
+  height: 83.64vh;
+  width: 100%;
+  background-color: #918c8c;
 }
 
 .message-timesent {
@@ -21,9 +61,8 @@
 
 .new-message-input-field {
   resize: none;
-  height: 2em;
 }
-.room-name {
+.room-name-container {
   background-color: #4e4e4e;
 }
 
@@ -33,7 +72,7 @@
 }
 
 .message-text {
-  white-space: break-spaces;
+  white-space: pre-line;
 }
 
 .message-item:hover {
@@ -42,11 +81,11 @@
 }
 
 .received-message {
-  background-color: green;
+  /* background-color: green; */
 }
 
 .my-message {
-  background-color: chocolate;
+  background-color: rgba(192, 154, 95, 0.5);
 }
 
 .App-logo {

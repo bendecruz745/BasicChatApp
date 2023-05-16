@@ -32,8 +32,10 @@ function ChatMessage({ message, index, username }) {
     whenSent = `${timeSent.getDate()}/${timeSent.getMonth()}/${timeSent.getFullYear()}`;
   }
 
+  const messageBody = message.messageBody.replace(/\\n/g, `\n`);
+
   return (
-    <div
+    <li
       key={index}
       className={`message-item ${
         username === message.senderUsername ? "my-message" : "received-message"
@@ -48,8 +50,8 @@ function ChatMessage({ message, index, username }) {
         </h5>
       </div>
 
-      <div className="message-text text-start ms-1">{message.messageBody}</div>
-    </div>
+      <div className="message-text text-start ms-1">{messageBody}</div>
+    </li>
   );
 }
 
