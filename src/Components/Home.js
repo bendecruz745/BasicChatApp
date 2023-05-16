@@ -8,8 +8,8 @@ function Home() {
         Please head to the top right Login to get started! <br />
         <b>NOTE:</b> My NodeJS server is being hosted on render.com and the
         service is spun down when it is inactive for awhile, if you are checking
-        this app out, attempt to login/signup and give it a minute or two and
-        have the service spun up and ready to go.{" "}
+        this app out, if you go attempt to login/signup it should poke the
+        service, it should be spun up in a few minutes.
         {`(You may also need a refresh)`}
       </p>
     </div>
