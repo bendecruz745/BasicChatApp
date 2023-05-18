@@ -16,7 +16,7 @@
 }
 
 .server-list,
-.user-list {
+.chat-members {
   width: 15%;
 }
 
@@ -71,6 +71,11 @@
   word-wrap: break-word;
 }
 
+.online-member-item,
+.offline-member-item {
+  list-style: none;
+}
+
 .message-text {
   white-space: pre-line;
 }
@@ -81,7 +86,7 @@
 }
 
 .received-message {
-  /* background-color: green; */
+  background-color: #918c8c;
 }
 
 .my-message {

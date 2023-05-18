@@ -5,11 +5,15 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ChatMessage from "./ChatMessage";
+import ChatMembers from "./ChatMembers";
 
 const ChatRoom = () => {
   console.log("rendering chatroom");
   const navigate = useNavigate();
-  const { messages, sendMessage } = useChat(useParams().roomID, navigate); // Creates a websocket and manages messaging
+  const { messages, chatMembers, sendMessage } = useChat(
+    useParams().roomID,
+    navigate
+  ); // Creates a websocket and manages messaging
   const username = useSelector((state) => state.loginReducer.username);
   let messageTracker = 0;
   let messageTimeMs = 0;
@@ -112,7 +116,7 @@ const ChatRoom = () => {
           </button>
         </div>
       </div>
-      <div className="user-list">TBD User List in current server view</div>
+      <ChatMembers chatMembers={chatMembers} />
     </div>
   );
 };

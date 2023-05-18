@@ -3,10 +3,11 @@ import socketIOClient from "socket.io-client";
 import Cookies from "js-cookie";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../Reducers/loggedInSlice";
-import { io } from "socket.io-client";
 
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage"; // Name of the event
-const RETRIEVE_CHAT_HISTORY = "retrieveChatHistory";
+const RETRIEVE_DATA = "retrieveData";
+const MEMBERS_UPDATE = "updateMembers";
+
 const LOGGEDOUT_EVENT = "loggedOut";
 
 // const SOCKET_SERVER_URL = "http://localhost:4000"; //dev
@@ -15,6 +16,7 @@ const SOCKET_SERVER_URL = process.env.REACT_APP_BASE_URL;
 
 const useChat = (roomId, navigate) => {
   const [messages, setMessages] = useState([]); // Sent and received messages
+  const [chatMembers, setChatMembers] = useState([]);
   const username = useSelector((state) => state.loginReducer.username);
   const dispatch = useDispatch();
 
@@ -33,9 +35,11 @@ const useChat = (roomId, navigate) => {
       },
     });
 
-    socketRef.current.on(RETRIEVE_CHAT_HISTORY, (chatHistory) => {
-      console.log("received chat history data is ", chatHistory.chatMessages);
-      setMessages(chatHistory.chatMessages);
+    socketRef.current.on(RETRIEVE_DATA, (data) => {
+      console.log("received chat history data is ", data.chatMessages);
+      console.log("received chat members, which is ", data.chatMembers);
+      setMessages(data.chatMessages);
+      setChatMembers(data.chatMembers);
     });
 
     // Listens for incoming messages
@@ -58,6 +62,11 @@ const useChat = (roomId, navigate) => {
       navigate("/");
     });
 
+    socketRef.current.on(MEMBERS_UPDATE, (data) => {
+      console.log("members list updating, should be the following ", data);
+      setChatMembers(data);
+    });
+
     // Destroys the socket reference
     // when the connection is closed
     return () => {
@@ -75,7 +84,7 @@ const useChat = (roomId, navigate) => {
     });
   };
 
-  return { messages, sendMessage };
+  return { messages, chatMembers, sendMessage };
 };
 
 export default useChat;
