@@ -11,7 +11,7 @@ function NavBar() {
   console.log(`navbar reading login state as ${JSON.stringify(loginState)}`);
 
   return (
-    <Navbar expanded={expanded} bg="dark" variant="dark" expand="lg">
+    <Navbar expanded={expanded} expand="lg">
       <Container fluid>
         <Link
           to={loginState.isLoggedIn ? "/ChatApp" : "/"}
@@ -22,25 +22,23 @@ function NavBar() {
             Ben's Basic Chat App {loginState.isLoggedIn}
           </Navbar.Brand>
         </Link>
-        <Nav navbarScroll>
-          {loginState.username ? (
-            <Link
-              to="/Profile"
-              className="nav-link "
-              onClick={() => setExpanded(false)}
-            >
-              {loginState.username}
-            </Link>
-          ) : (
-            <Link
-              to="/Login"
-              className="nav-link "
-              onClick={() => setExpanded(false)}
-            >
-              Login
-            </Link>
-          )}
-        </Nav>
+        {loginState.username ? (
+          <Link
+            to="/Profile"
+            className="profile-link"
+            onClick={() => setExpanded(false)}
+          >
+            {loginState.username}
+          </Link>
+        ) : (
+          <Link
+            to="/Login"
+            className="nav-link"
+            onClick={() => setExpanded(false)}
+          >
+            Login
+          </Link>
+        )}
       </Container>
     </Navbar>
   );

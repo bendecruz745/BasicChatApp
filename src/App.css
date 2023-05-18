@@ -5,7 +5,7 @@
 
 .App {
   text-align: center;
-  background-color: green;
+  background-color: #a67f8e;
   height: 100%;
   max-height: 100%;
 }
@@ -13,11 +13,30 @@
 .navbar {
   height: 5%;
   min-height: 5%;
+  background-color: #2c1a1d;
+}
+
+.navbar-brand,
+.nav-link,
+.chat-room-join-title,
+.profile-link,
+.room-name-text,
+.send-message-button {
+  color: #dbb3b1;
+}
+
+.profile-link {
+  text-decoration: none;
+}
+
+.profile-link:hover {
+  color: #000000;
 }
 
 .server-list,
 .chat-members {
   width: 15%;
+  background-color: #906e7b;
 }
 
 .chat-room,
@@ -45,6 +64,7 @@
 .room-name-container,
 .new-message-field {
   height: 5.7vh;
+  position: relative;
 }
 
 .messages-list {
@@ -52,7 +72,7 @@
   overflow-x: hidden;
   height: 83.63vh;
   width: 100%;
-  background-color: #918c8c;
+  background-color: #a67f8e;
 }
 
 .message-timesent {
@@ -61,9 +81,31 @@
 
 .new-message-input-field {
   resize: none;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  width: 100%;
+  border-radius: 10px;
+  background-color: #dbb3b1;
+}
+
+.new-message-input-field:focus {
+  outline: none;
+}
+
+.send-message-button {
+  position: absolute;
+  right: 1rem;
+  top: 20%;
+  bottom: 20%;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: #3a2226;
+  border-style: solid;
+  border-color: #6c4047;
+  height: 60%;
 }
 .room-name-container {
-  background-color: #4e4e4e;
+  background-color: #3a2226;
 }
 
 .message-item {
@@ -81,16 +123,16 @@
 }
 
 .message-item:hover {
-  filter: brightness(90%);
+  background-color: #906e7b;
   cursor: pointer;
 }
 
 .received-message {
-  background-color: #918c8c;
+  /* background-color: #918c8c; */
 }
 
 .my-message {
-  background-color: rgba(192, 154, 95, 0.5);
+  /* background-color: rgba(192, 154, 95, 0.5); */
 }
 
 .App-logo {
@@ -135,13 +177,13 @@
 
 /* scrollbar Track */
 ::-webkit-scrollbar-track {
-  background: #9f9f9f;
+  background: #dbb3b1;
   border-radius: 8px;
 }
 
 /* scrollbar Handle */
 ::-webkit-scrollbar-thumb {
-  background: #4e4e4e;
+  background: #3a2226;
   border-radius: 8px;
 }
 

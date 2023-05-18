@@ -20,7 +20,7 @@ function App() {
   dispatch(loginRefresh(navigate));
 
   return (
-    <div className="App d-flex flex-column bg-secondary">
+    <div className="App d-flex flex-column">
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />

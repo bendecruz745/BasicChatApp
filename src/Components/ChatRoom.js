@@ -78,7 +78,7 @@ const ChatRoom = () => {
       <div className="server-list">TBD Server list</div>
       <div className="chat-room-container d-flex flex-column">
         <div className="room-name-container m-0 p-0 d-flex justify-content-center align-items-center">
-          <h3>{useParams().roomID}</h3>
+          <h3 className="room-name-text">{useParams().roomID}</h3>
         </div>
         <div className="messages-container">
           <ol className="messages-list d-flex flex-column-reverse p-0 m-0">
@@ -100,7 +100,7 @@ const ChatRoom = () => {
             // onChange={handleNewMessageChange}
             ref={newMessage}
             placeholder="Write message..."
-            className="new-message-input-field w-75 border-0"
+            className="new-message-input-field border-0"
             onKeyDown={(event) => {
               if (event.key === "Enter" && !event.shiftKey) {
                 event.preventDefault();
@@ -108,10 +108,7 @@ const ChatRoom = () => {
               }
             }}
           />
-          <button
-            onClick={handleSendMessage}
-            className="send-message-button w-25"
-          >
+          <button onClick={handleSendMessage} className="send-message-button">
             Send
           </button>
         </div>

@@ -1,15 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { logout } from "../Reducers/loggedInSlice";
+// import { useDispatch } from "react-redux";
 
 const ChatRoomJoin = () => {
-  const [roomName, setRoomName] = React.useState("");
+  const [roomName, setRoomName] = useState("");
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const joinRoomHandler = () => {
     navigate(`/ChatApp/${roomName}`);
@@ -21,7 +19,7 @@ const ChatRoomJoin = () => {
 
   return (
     <div className="chat-room-join">
-      <h1>Type in a chat room to join</h1>
+      <h1 className="chat-room-join-title">Type in a chat room to join</h1>
       <input
         type="text"
         placeholder="Room"
