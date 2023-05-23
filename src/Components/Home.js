@@ -1,5 +1,5 @@
 function Home() {
-  console.log("rendering home component");
+  // console.log("rendering home component");
   return (
     <div className="homepage">
       <h1>Welcome to my Basic Chat App!</h1>

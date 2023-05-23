@@ -20,14 +20,14 @@ function Login() {
   });
   const navigate = useNavigate();
 
-  console.log("rendering Login component");
+  // console.log("rendering Login component");
 
   const handleLogin = (event) => {
     const usernameField = usernameFieldRef.current.value;
     const passwordField = passwordFieldRef.current.value;
     if (passwordField && usernameField) {
       setDisableButton(true);
-      console.log("handleLogin in Login.js run");
+      // console.log("handleLogin in Login.js run");
       const loginData = { username: usernameField, password: passwordField };
       dispatch(login({ loginData, setAlert, setDisableButton, navigate }));
       setDisableButton(false);
@@ -60,14 +60,14 @@ function Login() {
         .then((response) => response.json())
         .then((json) => {
           if (json.username) {
-            console.log(json);
+            // console.log(json);
             setAlert({
               display: true,
               errorType: "success",
               errorText: `User ${json.username} created`,
             });
           } else {
-            console.log(json);
+            // console.log(json);
             setAlert({
               display: true,
               errorType: "danger",

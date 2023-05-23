@@ -65,7 +65,7 @@ export const login =
           setDisableButton(false);
           navigate("/ChatApp");
         } else {
-          console.log(json);
+          // console.log(json);
           setAlert({
             display: true,
             errorType: "danger",
@@ -121,7 +121,7 @@ export const loginRefresh =
         })
         .catch((error) => console.log(error));
     } else {
-      console.log("cookie does not exist");
+      // console.log("cookie does not exist");
       dispatch(logoutSuccess());
     }
     // Cookies.set("authtoken", authToken, { expires: 1 });
@@ -129,7 +129,7 @@ export const loginRefresh =
   };
 
 export const logout = () => async (dispatch) => {
-  console.log(`Logout reducer being called`);
+  // console.log(`Logout reducer being called`);
   Cookies.remove("authtoken");
   dispatch(logoutSuccess());
 };
