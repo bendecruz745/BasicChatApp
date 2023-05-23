@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const ChatRoomJoin = () => {
   const [roomName, setRoomName] = useState("");
 
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const joinRoomHandler = () => {
     navigate(`/ChatApp/${roomName}`);

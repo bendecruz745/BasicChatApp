@@ -7,8 +7,8 @@ import { useSelector } from "react-redux";
 function NavBar() {
   const [expanded, setExpanded] = useState(false);
   const loginState = useSelector((state) => state.loginReducer);
-  console.log("rendering navbar");
-  console.log(`navbar reading login state as ${JSON.stringify(loginState)}`);
+  // console.log("rendering navbar");
+  // console.log(`navbar reading login state as ${JSON.stringify(loginState)}`);
 
   return (
     <Navbar expanded={expanded} expand="lg">

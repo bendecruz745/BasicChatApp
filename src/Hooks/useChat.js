@@ -17,16 +17,17 @@ const SOCKET_SERVER_URL = process.env.REACT_APP_BASE_URL;
 const useChat = (roomId, navigate) => {
   const [messages, setMessages] = useState([]); // Sent and received messages
   const [chatMembers, setChatMembers] = useState([]);
+  const [roomHistoryData, setRoomHistoryData] = useState([]);
   const username = useSelector((state) => state.loginReducer.username);
   const dispatch = useDispatch();
 
   const socketRef = useRef();
-  console.log("useChat triggered");
-  console.log(`roomID is ${roomId}`);
+  // console.log("useChat triggered");
+  // console.log(`roomID is ${roomId}`);
 
   useEffect(() => {
     // Creates a WebSocket connection
-    console.log("Creating new websocket connection");
+    // console.log("Creating new websocket connection");
     const cookieAuthToken = Cookies.get("authtoken");
     socketRef.current = socketIOClient(SOCKET_SERVER_URL, {
       query: {
@@ -35,9 +36,11 @@ const useChat = (roomId, navigate) => {
       },
     });
 
-    socketRef.current.on(RETRIEVE_DATA, (data) => {
-      console.log("received chat history data is ", data.chatMessages);
-      console.log("received chat members, which is ", data.chatMembers);
+    socketRef.current.on(RETRIEVE_DATA, (data, roomHistory) => {
+      // console.log("received chat history data is ", data.chatMessages);
+      // console.log("received chat members, which is ", data.chatMembers);
+      // console.log("useChat here, room history is ", roomHistory.roomHistory);
+      setRoomHistoryData(roomHistory.roomHistory);
       setMessages(data.chatMessages);
       setChatMembers(data.chatMembers);
     });
@@ -48,11 +51,11 @@ const useChat = (roomId, navigate) => {
         ...message,
         ownedByCurrentUser: message.senderUsername === username,
       };
-      console.log(
-        "receiving message, message username is ",
-        message.senderUsername
-      );
-      console.log("compared to redux store state username of  ", username);
+      // console.log(
+      //   "receiving message, message username is ",
+      //   message.senderUsername
+      // );
+      // console.log("compared to redux store state username of  ", username);
 
       setMessages((messages) => [...messages, incomingMessage]);
     });
@@ -63,14 +66,14 @@ const useChat = (roomId, navigate) => {
     });
 
     socketRef.current.on(MEMBERS_UPDATE, (data) => {
-      console.log("members list updating, should be the following ", data);
+      // console.log("members list updating, should be the following ", data);
       setChatMembers(data);
     });
 
     // Destroys the socket reference
     // when the connection is closed
     return () => {
-      console.log("disconnect firing");
+      // console.log("disconnect firing");
       socketRef.current.disconnect();
     };
   }, [roomId, dispatch, navigate, username]);
@@ -84,7 +87,7 @@ const useChat = (roomId, navigate) => {
     });
   };
 
-  return { messages, chatMembers, sendMessage };
+  return { messages, chatMembers, roomHistoryData, sendMessage };
 };
 
 export default useChat;

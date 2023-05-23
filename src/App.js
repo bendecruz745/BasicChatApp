@@ -13,8 +13,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 function App() {
-  console.log("main app loading");
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   dispatch(loginRefresh(navigate));

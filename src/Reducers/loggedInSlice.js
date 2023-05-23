@@ -37,7 +37,7 @@ export const login =
     // const url = "http://localhost:4000/user/login"; // dev
     const url = process.env.REACT_APP_BASE_URL + "/user/login";
 
-    console.log("login in loggedInSliceReducer run");
+    // console.log("login in loggedInSliceReducer run");
 
     fetch(url, {
       method: "POST",
@@ -52,9 +52,9 @@ export const login =
           // console.log(json);
           const username = json.username;
           const authToken = json.token;
-          console.log(
-            `This is login in loggedInSlice, authToken is ${authToken}`
-          );
+          // console.log(
+          //   `This is login in loggedInSlice, authToken is ${authToken}`
+          // );
           Cookies.set("authtoken", authToken, { expires: 1 });
           dispatch(loginSuccess({ username, authToken }));
           setAlert({
@@ -84,16 +84,16 @@ export const testSomething = () => async (dispatch) => {
 export const loginRefresh =
   ({ navigate }) =>
   async (dispatch) => {
-    console.log(
-      `auto auth check, cookie picked up is ${Cookies.get("authtoken")}`
-    );
+    // console.log(
+    //   `auto auth check, cookie picked up is ${Cookies.get("authtoken")}`
+    // );
     // const url = "https://benchatappbackend.onrender.com/user/isLoggedIn"; //live
     // const url = "http://localhost:4000/user/isLoggedIn"; //dev
     const url = process.env.REACT_APP_BASE_URL + "/user/isLoggedIn";
 
     const cookieAuthToken = Cookies.get("authtoken");
     if (cookieAuthToken !== undefined) {
-      console.log(`Cookie exists, its ${cookieAuthToken}`);
+      // console.log(`Cookie exists, its ${cookieAuthToken}`);
       fetch(url, {
         method: "POST",
         headers: {
@@ -107,15 +107,15 @@ export const loginRefresh =
             // console.log(json);
             const username = json.username;
             const authToken = json.newToken;
-            console.log(
-              `This is loginRefresh in loggedInSlice, authToken is ${authToken}`
-            );
-            console.log(`here is the rest of the json ${JSON.stringify(json)}`);
+            // console.log(
+            //   `This is loginRefresh in loggedInSlice, authToken is ${authToken}`
+            // );
+            // console.log(`here is the rest of the json ${JSON.stringify(json)}`);
             Cookies.set("authtoken", authToken, { expires: 1 });
             dispatch(loginSuccess({ username, authToken }));
           } else {
             // console.log(json);
-            console.log("failure, logging out");
+            console.log("failure refreshing/verifying login, logging out");
             dispatch(logout());
           }
         })

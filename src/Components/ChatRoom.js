@@ -6,11 +6,12 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ChatMessage from "./ChatMessage";
 import ChatMembers from "./ChatMembers";
+import RoomHistory from "./RoomHistory";
 
 const ChatRoom = () => {
-  console.log("rendering chatroom");
+  // console.log("rendering chatroom");
   const navigate = useNavigate();
-  const { messages, chatMembers, sendMessage } = useChat(
+  const { messages, chatMembers, roomHistoryData, sendMessage } = useChat(
     useParams().roomID,
     navigate
   ); // Creates a websocket and manages messaging
@@ -37,7 +38,7 @@ const ChatRoom = () => {
     }
 
     if (
-      messageTimeMs <= trackedMessageMs + 300000 &&
+      messageTimeMs <= trackedMessageMs + 60000 &&
       messageTimeMs >= trackedMessageMs
     ) {
       messages[
@@ -75,10 +76,10 @@ const ChatRoom = () => {
 
   return (
     <div className="chat-room d-flex">
-      <div className="server-list">TBD Server list</div>
+      <RoomHistory roomHistoryData={roomHistoryData} />
       <div className="chat-room-container d-flex flex-column">
         <div className="room-name-container m-0 p-0 d-flex justify-content-center align-items-center">
-          <h3 className="room-name-text">{useParams().roomID}</h3>
+          <h1 className="room-name-text">{useParams().roomID}</h1>
         </div>
         <div className="messages-container">
           <ol className="messages-list d-flex flex-column-reverse p-0 m-0">

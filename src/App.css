@@ -8,21 +8,25 @@
   background-color: #a67f8e;
   height: 100%;
   max-height: 100%;
+  overflow: hidden;
 }
 
 .navbar {
   height: 5%;
-  min-height: 5%;
+  min-height: 3em;
   background-color: #2c1a1d;
 }
 
 .navbar-brand,
 .nav-link,
-.chat-room-join-title,
 .profile-link,
 .room-name-text,
 .send-message-button {
   color: #dbb3b1;
+}
+
+.chat-room-join-title {
+  color: #2c1a1d;
 }
 
 .profile-link {
@@ -33,7 +37,7 @@
   color: #000000;
 }
 
-.server-list,
+.room-history-container,
 .chat-members {
   width: 15%;
   background-color: #906e7b;
@@ -58,12 +62,12 @@
 
 .messages-container {
   height: 100%;
-  max-height: 88%;
 }
 
 .room-name-container,
 .new-message-field {
   height: 5.7vh;
+  min-height: 5.7vh;
   position: relative;
 }
 
@@ -86,6 +90,7 @@
   width: 100%;
   border-radius: 10px;
   background-color: #dbb3b1;
+  overflow: hidden;
 }
 
 .new-message-input-field:focus {
@@ -108,7 +113,8 @@
   background-color: #3a2226;
 }
 
-.message-item {
+.message-item,
+.room-history-item {
   list-style: none;
   word-wrap: break-word;
 }
@@ -125,6 +131,21 @@
 .message-item:hover {
   background-color: #906e7b;
   cursor: pointer;
+}
+
+.room-history-item:hover {
+  background-color: #755964;
+  cursor: pointer;
+}
+
+.room-history-item:active {
+  filter: brightness(80%);
+}
+
+.offline-members-list,
+.online-members-list,
+.room-history-list {
+  padding: 0;
 }
 
 .received-message {
@@ -189,5 +210,5 @@
 
 /* scrollbar Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #2c1a1d;
 }
