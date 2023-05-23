@@ -92,7 +92,7 @@ function Login() {
           <div className="usernameField d-flex justify-content-between mb-2 mt-3">
             Username:
             <input
-              className="ms-1"
+              className="ms-1 username-input-field"
               id="usernameInput"
               placeholder="Username"
               // value={usernameField}
@@ -105,7 +105,7 @@ function Login() {
           <div className="passwordField d-flex justify-content-between">
             Password:
             <input
-              className="ms-1"
+              className="ms-1 password-input-field"
               id="passwordInput"
               placeholder="Password"
               // value={passwordField}
@@ -125,14 +125,14 @@ function Login() {
         <div>
           <Button
             disabled={disableButton}
-            className="m-4"
+            className="m-4 standard-button"
             onClick={handleLogin}
           >
             Login
           </Button>
           <Button
             disabled={disableButton}
-            className="m-4"
+            className="m-4 standard-button"
             onClick={handleSignup}
           >
             Sign Up

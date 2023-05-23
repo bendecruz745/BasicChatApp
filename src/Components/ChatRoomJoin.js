@@ -32,7 +32,10 @@ const ChatRoomJoin = () => {
           }
         }}
       />
-      <Button onClick={joinRoomHandler} className="enter-room-button ms-2">
+      <Button
+        onClick={joinRoomHandler}
+        className="enter-room-button standard-button ms-2"
+      >
         Join room
       </Button>
     </div>

@@ -25,7 +25,12 @@
   color: #dbb3b1;
 }
 
-.chat-room-join-title {
+.nav-link:focus {
+  color: #dbb3b1;
+}
+
+.chat-room-join-title,
+.profile-title {
   color: #2c1a1d;
 }
 
@@ -93,7 +98,18 @@
   overflow: hidden;
 }
 
-.new-message-input-field:focus {
+.password-input-field,
+.username-input-field,
+.text-input-field {
+  background-color: #dbb3b1;
+  border-color: #c09d9b;
+  border-radius: 5px;
+}
+
+.new-message-input-field:focus,
+.password-input-field:focus,
+.username-input-field:focus,
+.text-input-field {
   outline: none;
 }
 
@@ -108,6 +124,18 @@
   border-style: solid;
   border-color: #6c4047;
   height: 60%;
+}
+
+.standard-button {
+  background-color: #3a2226;
+  border-color: #6c4047;
+  color: #dbb3b1;
+}
+
+.standard-button:hover {
+  background-color: #2e1b1f;
+  border-color: #6c4047;
+  color: #dbb3b1;
 }
 .room-name-container {
   background-color: #3a2226;

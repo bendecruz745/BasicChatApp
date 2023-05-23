@@ -15,7 +15,10 @@ function Profile() {
   // console.log("rendering Profile component");
   return (
     <div>
-      <Button className="logout-button" onClick={logoutHandler}>
+      <h1 className="profile-title">
+        Not much to show, here is a logout button
+      </h1>
+      <Button className="logout-button standard-button" onClick={logoutHandler}>
         Logout
       </Button>
     </div>

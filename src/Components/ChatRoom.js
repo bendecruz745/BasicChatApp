@@ -53,7 +53,6 @@ const ChatRoom = () => {
   const parsedMessages = messages.filter((element) => {
     return element !== undefined;
   });
-
   // const [newMessage, setNewMessage] = useState(""); // Message to be sent
   const newMessage = useRef();
   // console.log("chatroom here, messages is ", messages);
@@ -83,7 +82,7 @@ const ChatRoom = () => {
         </div>
         <div className="messages-container">
           <ol className="messages-list d-flex flex-column-reverse p-0 m-0">
-            {parsedMessages ? (
+            {parsedMessages.length > 0 ? (
               parsedMessages
                 .slice(0)
                 .reverse()
